@@ -270,6 +270,13 @@ select:focus {
   margin-bottom: 15px;
 }
 
+.navigation-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 .health-tip {
   text-align: center;
   background: white;
@@ -281,4 +288,120 @@ select:focus {
 .health-tip h4 {
   color: var(--uzima-blue);
   margin-bottom: 10px;
+}
+
+/* ============================
+    PATIENT LIST
+    ============================ */
+.patient-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.patient-list h2 {
+  text-align: center;
+  color: var(--uzima-blue);
+  margin-bottom: 30px;
+}
+
+.patient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.patient-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.patient-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.patient-card h3 {
+  color: var(--uzima-blue);
+  margin-bottom: 10px;
+}
+
+.patient-card p {
+  margin: 5px 0;
+  color: var(--uzima-text);
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* ============================
+    BLOOD SUGAR TRACKER
+    ============================ */
+.blood-sugar-tracker {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tracker-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.stat {
+  text-align: center;
+  background: var(--uzima-gray);
+  padding: 20px;
+  border-radius: var(--radius);
+}
+
+.stat h3 {
+  color: var(--uzima-blue);
+  margin-bottom: 10px;
+}
+
+.stat p {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--uzima-text);
+}
+
+.add-reading {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.add-reading input {
+  flex: 1;
+}
+
+.readings-list h3 {
+  color: var(--uzima-blue);
+  margin-bottom: 15px;
+}
+
+.readings-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.readings-list li {
+  background: var(--uzima-gray);
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: var(--radius);
 }

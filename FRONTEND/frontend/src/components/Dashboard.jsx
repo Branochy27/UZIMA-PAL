@@ -4,7 +4,7 @@ import QuickActions from './QuickActions';
 import HealthTip from './HealthTip';
 import HealthLog from './HealthLog';
 
-function Dashboard({ sugar, readings, onTrackSugar, onLogReading, onGoToForm }) {
+function Dashboard({ sugar, readings, onTrackSugar, onLogReading, onGoToForm, onGoToPatients }) {
   return (
     <div className="dashboard">
       <h1>Uzima Pal</h1>
@@ -17,7 +17,10 @@ function Dashboard({ sugar, readings, onTrackSugar, onLogReading, onGoToForm }) 
       </div>
       <HealthLog readings={readings} />
       <QuickActions onTrackSugar={onTrackSugar} />
-      <button className="btn" onClick={onGoToForm}>Go to Health Form</button>
+      <div className="navigation-buttons">
+        <button className="btn" onClick={onGoToForm}>Go to Health Form</button>
+        <button className="btn" onClick={onGoToPatients}>View All Patients</button>
+      </div>
       <HealthTip />
     </div>
   );

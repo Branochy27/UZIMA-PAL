@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import LoginForm from './components/LoginForm';
 import Dashboard from './components/Dashboard';
 import HealthForm from './components/HealthForm';
+import PatientList from './components/PatientList';
+import BloodSugarTracker from './components/BloodSugarTracker';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentPage, setCurrentPage] = useState('dashboard');
+  const [selectedPatient, setSelectedPatient] = useState(null);
   const [sugarReadings, setSugarReadings] = useState([95]); // array of readings
 
   useEffect(() => {
@@ -47,10 +50,21 @@ function App() {
             onTrackSugar={handleTrackSugar}
             onLogReading={handleLogReading}
             onGoToForm={() => setCurrentPage('form')}
+            onGoToPatients={() => setCurrentPage('patients')}
           />
-        ) : (
+        ) : currentPage === 'form' ? (
           <HealthForm onBack={() => setCurrentPage('dashboard')} />
-        )
+        ) : currentPage === 'patients' ? (
+          <PatientList onViewPatient={(patient) => {
+            setSelectedPatient(patient);
+            setCurrentPage('tracker');
+          }} />
+        ) : currentPage === 'tracker' ? (
+          <BloodSugarTracker
+            patient={selectedPatient}
+            onBack={() => setCurrentPage('patients')}
+          />
+        ) : null
       ) : (
         <LoginForm onLogin={handleLogin} />
       )}
