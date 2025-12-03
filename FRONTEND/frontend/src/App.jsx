@@ -1,32 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import LoginForm from './components/LoginForm';
+import React, { useState } from 'react';
+import { SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
 import Dashboard from './components/Dashboard';
 import HealthForm from './components/HealthForm';
 import PatientList from './components/PatientList';
 import BloodSugarTracker from './components/BloodSugarTracker';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [sugarReadings, setSugarReadings] = useState([95]); // array of readings
-
-  useEffect(() => {
-    // Check if user is logged in (e.g., from localStorage or token)
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const handleLogin = async (credentials) => {
-    // Simulate API call
-    console.log('Logging in with:', credentials);
-    // In real app, call backend API
-    // For demo, just set logged in
-    localStorage.setItem('token', 'fake-token');
-    setIsLoggedIn(true);
-  };
 
   const handleTrackSugar = () => {
     alert('Track Blood Sugar clicked');
@@ -42,8 +24,8 @@ function App() {
 
   return (
     <div className="app">
-      {isLoggedIn ? (
-        currentPage === 'dashboard' ? (
+      <SignedIn>
+        {currentPage === 'dashboard' ? (
           <Dashboard
             sugar={sugarReadings[sugarReadings.length - 1]}
             readings={sugarReadings}
@@ -64,10 +46,11 @@ function App() {
             patient={selectedPatient}
             onBack={() => setCurrentPage('patients')}
           />
-        ) : null
-      ) : (
-        <LoginForm onLogin={handleLogin} />
-      )}
+        ) : null}
+      </SignedIn>
+      <SignedOut>
+        <SignIn />
+      </SignedOut>
     </div>
   );
 }
